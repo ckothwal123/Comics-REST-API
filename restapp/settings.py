@@ -12,6 +12,30 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+# Celery settings
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
+
+# Celery beat is used to schedule the tasks
+# CELERY_BEAT_SCHEDULE = {
+#     'task-add': {
+#         'task': 'myapp.tasks.add',
+#         'schedule': 15,
+#         'args': (4, 5)
+#     },
+#     'task-mul': {
+#         'task': 'myapp.tasks.mul',
+#         'schedule': crontab(minute='*/2'),
+#         'args': (4, 5)
+#     },
+# }
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+# CELERY_TASK_SERIALIZER = 'json'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -38,6 +62,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "rest_framework",
+    "webscrape.apps.WebscrapeConfig",
 ]
 
 MIDDLEWARE = [
@@ -122,3 +147,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = "/static/"
+
+# Adding settings for rest framework
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ]
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
+    "PAGE_SIZE": 10,
+}
