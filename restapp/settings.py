@@ -11,21 +11,16 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+from celery.schedules import crontab
 # Celery settings
 
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 
-# Celery beat is used to schedule the tasks
+# #Celery beat is used to schedule the tasks
 # CELERY_BEAT_SCHEDULE = {
-#     'task-add': {
-#         'task': 'myapp.tasks.add',
-#         'schedule': 15,
-#         'args': (4, 5)
-#     },
-#     'task-mul': {
-#         'task': 'myapp.tasks.mul',
-#         'schedule': crontab(minute='*/2'),
+#     'task-scrape-awkward-yeti': {
+#         'task': 'webscrape.tasks.scrape_awkward_yeti',
+#         'schedule': crontab(minute='*/5'),
 #         'args': (4, 5)
 #     },
 # }

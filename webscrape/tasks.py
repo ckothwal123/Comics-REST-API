@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import requests
 from collections import defaultdict
 from typing import List
-from webscrape.models import HeartAndBrain
+
 
 @shared_task
 def add(x, y):
@@ -39,11 +39,25 @@ def scrape_awkward_yeti(pages):
             res[heading[title]] = image_links[title]
 
     
-    for title in res.keys():
-        new_record = HeartAndBrain(heading = title, src_link = res[title])
-        new_record.save()
+    # for title in res.keys():
+    #     new_record = HeartAndBrain(heading = title, src_link = res[title])
+    #     new_record.save()
     
     return res
+
+@shared_task
+def scrape_garfield():
+    garfield_comics = defaultdict(str)
+
+    for page_number in range(1,5):
+        url = "http://pt.jikos.cz/garfield/2020/"+str(page_number)
+        page = requests.get(url)
+
+        soup = BeautifulSoup(page.content, 'html.parser')
+        test_one = soup.find_all('tr')
+    
+    for record in test_one:
+        garfield_comics[record.find('img')["alt"]] = record.find('img')["src"]
 
 @shared_task
 def s3_bucket_upload(comic_name, bucket_name):
