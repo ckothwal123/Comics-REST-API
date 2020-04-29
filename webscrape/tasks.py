@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 import requests
 from collections import defaultdict
 from typing import List
-
+from webscrape.models import Comics
 
 @shared_task
 def add(x, y):
@@ -38,12 +38,15 @@ def scrape_awkward_yeti(pages):
         for title in range(len(heading)):
             res[heading[title]] = image_links[title]
 
+    try:
+        for title in res.keys():
+            new_record = Comics(comic_title=title,comic_type="heart-and-brain",comic_link=res[title])
+            new_record.save()
+        return True
+
+    except:
+        return False
     
-    # for title in res.keys():
-    #     new_record = HeartAndBrain(heading = title, src_link = res[title])
-    #     new_record.save()
-    
-    return res
 
 @shared_task
 def scrape_garfield():
@@ -59,7 +62,13 @@ def scrape_garfield():
     for record in test_one:
         garfield_comics[record.find('img')["alt"]] = record.find('img')["src"]
 
-@shared_task
-def s3_bucket_upload(comic_name, bucket_name):
-    pass
+    try:
+        for title in garfield_comics.keys():
+            new_record = Comics(comic_title=title,comic_type="heart-and-brain",comic_link=garfield_comics[title])
+            new_record.save()
+        return True
+
+    except:
+        return False
+
 
