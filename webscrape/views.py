@@ -1,33 +1,40 @@
 from django.shortcuts import render
-
-# Create your views here.
-from django.contrib.auth.models import User, Group
-from rest_framework import viewsets
-from rest_framework import permissions
-from webscrape.serializers import UserSerializer, GroupSerializer
 from webscrape.tasks import add, scrape_awkward_yeti
-from django.http import HttpResponse
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
-
-    queryset = User.objects.all().order_by("-date_joined")
-    serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+from django.http import HttpResponse, HttpResponseRedirect
+from rest_framework.response import Response
+from rest_framework.reverse import reverse
+from webscrape.models import Comics, Titles
+from rest_framework.decorators import api_view
+from rest_framework.generics import ListAPIView
+from webscrape.serializers import ComicsSerializer, ComicsTitleSerializer
 
 
-class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
-
-    queryset = Group.objects.all()
-    serializer_class = GroupSerializer
-    permission_classes = [permissions.IsAuthenticated]
+def homepage_redirect(request):
+    return HttpResponseRedirect("/comics/")
 
 
-def heartAndBrain(request):
-    scrape_awkward_yeti.delay(10)
-    return HttpResponse("Testing the Celery tasks for now")
+@api_view(["GET"])
+def api_root(request, format=None):
+    return Response(
+        {
+            "heart-and-brain": reverse(
+                "heart-and-brain", request=request, format=format
+            ),
+            "garfield": reverse("garfield", request=request, format=format),
+        }
+    )
+
+
+class HeartAndBrainList(ListAPIView):
+    queryset = Comics.objects.filter(comic_type="heart-and-brain")
+    serializer_class = ComicsSerializer
+
+
+class GarfieldList(ListAPIView):
+    queryset = Comics.objects.filter(comic_type="garfield")
+    serializer_class = ComicsSerializer
+
+
+class ComicsList(ListAPIView):
+    queryset = Titles.objects.all()
+    serializer_class = ComicsTitleSerializer()

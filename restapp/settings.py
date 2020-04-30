@@ -12,9 +12,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 from celery.schedules import crontab
+
 # Celery settings
 
-CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
+CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 
 # #Celery beat is used to schedule the tasks
 # CELERY_BEAT_SCHEDULE = {
