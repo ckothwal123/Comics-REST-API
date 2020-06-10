@@ -103,12 +103,12 @@ DATABASES = {
     #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     # }
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "django.db.backends.postgresql",
         "NAME": "comics",
-        "USER": "dbadmin",
-        "PASSWORD": "12345",
+        "USER": "postgres",
+        "PASSWORD": "testingdb",
         "HOST": "localhost",
-        "PORT": "3306",
+        "PORT": "5432",
         "TEST": {"NAME": "mytestdatabase",},
     },
 }

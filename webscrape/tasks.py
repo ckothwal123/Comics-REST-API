@@ -25,15 +25,15 @@ def scrape_awkward_yeti(pages):
     for page in range(1, pages):
         heading = []
         image_links = []
-        url = "http://theawkwardyeti.com/chapter/heart-and-brain-2/page/" + str(page)
+        url = "https://theawkwardyeti.com/chapter/heart-and-brain/page/" + str(page)
         page = requests.get(url)
 
         soup = BeautifulSoup(page.content, "html.parser")
-        titles = soup.find_all("h2", "post-title")
+        titles = soup.find_all("h3", "mb-4")
         images = soup.find_all("p", "comic-thumbnail-in-archive")
 
         for title in titles:
-            heading.append(title.text)
+            heading.append(title.text.strip())
 
         for image in images:
             image_links.append(image.find("img")["src"])
@@ -47,6 +47,7 @@ def scrape_awkward_yeti(pages):
                 comic_title=title, comic_type="heart-and-brain", comic_link=res[title]
             )
             new_record.save()
+                
         return True
 
     except:

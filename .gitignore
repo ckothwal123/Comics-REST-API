@@ -7,3 +7,5 @@ restapp/__pycache__/wsgi.cpython-37.pyc
 webscrape/__pycache__/
 webscrape/migrations/__pycache__/
 .vscode/
+restapp/__pycache__/celery.cpython-37.pyc
+restapp/__pycache__/celery.cpython-37.pyc
