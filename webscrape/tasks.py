@@ -11,11 +11,6 @@ from typing import List
 from webscrape.models import Comics
 
 
-@shared_task
-def add(x, y):
-    print("Process started from celery")
-    return x + y
-
 
 @shared_task
 def scrape_awkward_yeti(pages):
