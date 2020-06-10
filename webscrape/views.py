@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from webscrape.tasks import add, scrape_awkward_yeti
 from django.http import HttpResponse, HttpResponseRedirect
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
