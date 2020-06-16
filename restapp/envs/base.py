@@ -40,14 +40,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "(3gbc8!%m4t#t22(*edr=93z!3&uwpp!k2=-k-2&vf7g=5vo48"
+# SECRET_KEY = "(3gbc8!%m4t#t22(*edr=93z!3&uwpp!k2=-k-2&vf7g=5vo48"
 #Changing the key for production
-# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', '(3gbc8!%m4t#t22(*edr=93z!3&uwpp!k2=-k-2&vf7g=5vo48')
+# SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', "(3gbc8!%m4t#t22(*edr=93z!3&uwpp!k2=-k-2&vf7g=5vo48")
 
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-#DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -101,21 +97,18 @@ WSGI_APPLICATION = "restapp.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "comics",
-        "USER": "postgres",
-        "PASSWORD": "testingdb",
-        "HOST": "localhost",
-        "PORT": "5432",
-        "TEST": {"NAME": "mytestdatabase",},
-    },
-}
+# DATABASES = {
+
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "comics",
+#         "USER": "postgres",
+#         "PASSWORD": "testingdb",
+#         "HOST": "localhost",
+#         "PORT": "5432",
+#         "TEST": {"NAME": "mytestdatabase",},
+#     },
+# }
 
 
 # Password validation
