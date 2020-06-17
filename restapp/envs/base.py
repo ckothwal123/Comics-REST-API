@@ -17,20 +17,6 @@ from celery.schedules import crontab
 
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 
-# #Celery beat is used to schedule the tasks
-# CELERY_BEAT_SCHEDULE = {
-#     'task-scrape-awkward-yeti': {
-#         'task': 'webscrape.tasks.scrape_awkward_yeti',
-#         'schedule': crontab(minute='*/5'),
-#         'args': (4, 5)
-#     },
-# }
-
-#: Only add pickle to this list if your broker is secured
-#: from unwanted access (see userguide/security.html)
-# CELERY_ACCEPT_CONTENT = ['json']
-# CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
-# CELERY_TASK_SERIALIZER = 'json'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
