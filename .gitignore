@@ -9,5 +9,5 @@ webscrape/migrations/__pycache__/
 .vscode/
 restapp/__pycache__/celery.cpython-37.pyc
 restapp/__pycache__/celery.cpython-37.pyc
-restapp/settings/local.py
+restapp/envs/local.py
 restapp/envs/__pycache__/
