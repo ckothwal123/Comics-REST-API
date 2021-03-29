@@ -26,7 +26,7 @@ pathspec==0.8.0
 pathtools==0.1.2
 psycopg2==2.8.5
 pycparser==2.20
-Pygments==2.6.1
+Pygments==2.7.4
 pytz==2019.3
 regex==2020.4.4
 requests==2.23.0
